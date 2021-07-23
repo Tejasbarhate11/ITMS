@@ -1,0 +1,126 @@
+{{> header}}
+<div class="container-fluid p-4">
+    <h1><span id="closebtn" class="material-icons pb-2">close</span> Assign Questions</h1>
+    <div class="form-group mx-2">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" readonly>
+    </div>
+    <div class="row mx-0">
+        <div class="col-md-6 px-2">
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" class="form-control" id="department" readonly>
+            </div>
+            <div class="form-group">
+                <label for="totalScore">Total marks:</label>
+                <input type="number" class="form-control" id="totalScore" readonly>
+            </div>
+        </div>
+        <div class="col-md-6 px-2">
+            <div class="form-group">
+                <label for="designation">Designation:</label>
+                <input type="text" class="form-control" id="designation" readonly>
+            </div>
+            <div class="form-group">
+                <label for="timeLimit">Time limit (seconds): </label>
+                <input type="number" class="form-control" id="timeLimit" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="table-sm shadow-sm mt-2 mb-2 p-1">
+        <h2>Assigned Questions</h2>
+        <label for="pageSizeAQ" >Page size:</label>
+            <select name="size" id="pageSizeAQ" onchange="changeAQPageSize()">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+            </select>
+        <table class="table table-striped table-bordered table-hover text-center mt-2" width="100%">
+            <thead >
+                <tr class="align-top">
+                    <th scope="col">ID</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Total Score</th>
+                    <th scope="col">Time Limit</th>
+                    <th scope="col">Keywords</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead >
+            <tbody id="assignedQuestions" class="overflow-hidden">
+            </tbody>
+        </table>
+        <div id="noAssignedQuestions" class="alert alert-danger mx-0 my-2">
+        </div>
+        <p id="pagesIndicatorAQ" class="py-2">-/-</p>
+    </div>
+    <div style="width: 100%;">
+        <button id="previousbtnAQ" class="btn pagelink btn-outline-dark float-left px-2 mt-1 mb-3">Previous</button>
+        <button id="nextbtnAQ" class="btn pagelink btn-outline-dark float-right px-2 mt-1 mb-3">Next</button>
+    </div>
+    <div class="table-responsive-md shadow-sm mt-5 mb-2 p-1">
+        <h2 class="float-left">Selected Questions</h2>
+        <button onclick="assignQuestions()" class="btn btn-primary float-right mt-1">Assign Questions</button>
+        <table class="table table-striped table-bordered table-hover text-center mt-4" width="100%">
+            <thead >
+                <tr class="align-top">
+                    <th scope="col">ID</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Total Score</th>
+                    <th scope="col">Time Limit</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead >
+            <tbody id="selectedQuestions">
+            </tbody>
+        </table>
+        <div id="noSelectedQuestions" class="alert alert-danger mx-0 my-2">
+            No questions selected to assign!
+        </div>
+        
+    </div>
+    <div class="table-responsive-md shadow-sm mt-5 mb-2 p-1">
+        <h2>Search Questions By Keywords</h2>
+        <label for="pageSize" >Page size:</label>
+            <select name="size" id="pageSize" onchange="changePageSize()">
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+            </select>
+        <div class="form-group">
+            <label>Enter keywords to search questions(max 15):</label>
+            (press enter after you typed to add the keyword)
+            <div class="tag-container">
+                <input id="tagsInput"/>  
+                <button id="searchbtn" class="btn btn-primary mt-1"><span class="material-icons">search</span> Search</button>
+            </div>   
+        </div>
+        <table class="table table-striped table-bordered table-hover text-center mt-2" width="100%">
+            <thead >
+                <tr class="align-top">
+                    <th scope="col">ID</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Total Score</th>
+                    <th scope="col">Time Limit</th>
+                    <th scope="col">Keywords</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead >
+            <tbody id="questions">
+            </tbody>
+        </table>
+        <div id="noQuestions" class="alert alert-danger mx-0 my-2">
+            Search Something!
+        </div>
+        <p id="pagesIndicator" class="py-2">-/-</p>
+    </div>
+    <div style="width: 100%;">
+        <button id="previousbtn" class="btn pagelink btn-outline-dark float-left px-2 mt-1 mb-3">Previous</button>
+        <button id="nextbtn" class="btn pagelink btn-outline-dark float-right px-2 mt-1 mb-3">Next</button>
+    </div>
+</div>
+<script src="/js/assignquestions.js"></script>

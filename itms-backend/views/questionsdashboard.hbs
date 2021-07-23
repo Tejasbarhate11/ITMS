@@ -1,0 +1,90 @@
+{{> navbar}}
+{{> dashnav}}
+
+<div class="container-fluid px-4">
+  <div class="jumbotron jumbotron-fluid">
+      <div class="container-fluid">
+          <h1 class="display-4">Questions</h1>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="card bg-primary text-center shadow p-1 mb-5">
+        <div class="card-body">
+          <h4>Total MCQ Single Answer Questions</h4>
+          <h2 id="mcqs_questions">-</h2>
+        </div>      
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card bg-primary text-center shadow p-1 mb-5">
+        <div class="card-body">
+          <h4>Total MCQ Multiple Answer Questions</h4>
+          <h2 id="mcqm_questions">-</h2>
+        </div>      
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card bg-primary text-center shadow p-1 mb-5">
+        <div class="card-body">
+          <h4>Total True/False Questions</h4>
+          <h2 id="tf_questions">-</h2>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-md-3">
+      <div id="addquestionbtn" class="card bg-success text-center shadow p-1 mb-2">
+        <div class="card-body">
+          <h4>Add question</h4>
+          <span class="material-icons mt-2" style="font-size: 36px;">add</span>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive-md shadow-sm mt-5 mb-2 p-2">
+        <h2>Search Questions</h2>
+        <label for="pageSize" >Page size:</label>
+            <select name="size" id="pageSize" onchange="changePageSize()">
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+            </select>
+        <div class="form-group">
+            <label>Enter keywords to search questions(max 15):</label>
+            (press enter after you typed to add the keyword)
+            <div class="tag-container">
+                <input id="tagsInput"/>  
+                <button id="searchbtn" class="btn btn-primary mt-1"><span class="material-icons pb-1">search</span> Search</button>
+                <button id="clearbtn" class="btn btn-danger mt-1" style="display: none;"><span class="material-icons pb-1">clear</span> Clear</button>
+            </div>   
+        </div>
+        <table class="table table-striped table-bordered table-hover text-center mt-2" width="100%">
+        <thead >
+            <tr class="align-top">
+                <th scope="col">ID</th>
+                <th scope="col">Type</th>
+                <th scope="col">Question</th>
+                <th scope="col">Total Score</th>
+                <th scope="col">Time Limit</th>
+                <th scope="col">Keywords</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead >
+        <tbody id="questions">
+        </tbody>
+        </table>
+        <div id="noQuestions" class="alert alert-danger mx-0 my-2">
+            Search Something!
+        </div>
+        <p id="pagesIndicator" class="py-2">-/-</p>
+    </div>
+    <div style="width: 100%;">
+        <button id="previousbtn" class="btn pagelink btn-outline-dark float-left px-2 mt-1 mb-3">Previous</button>
+        <button id="nextbtn" class="btn pagelink btn-outline-dark float-right px-2 mt-1 mb-3">Next</button>
+    </div>
+</div>
+
+<script src="/js/questions.js"></script>

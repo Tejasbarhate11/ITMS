@@ -1,0 +1,78 @@
+{{> navbar}}
+{{> dashnav}}
+
+<div class="container-fluid px-4">
+  <div class="jumbotron jumbotron-fluid">
+      <div class="container-fluid">
+          <h1 class="display-4">Departments</h1>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="card bg-primary text-center shadow p-1 mb-5">
+        <div class="card-body">
+          <h4>Active departments</h4>
+          <h2 id="active_departments">-</h2>
+        </div>      
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card bg-primary text-center shadow p-1 mb-5">
+        <div class="card-body">
+          <h4>Inactive departments</h4>
+          <h2 id="inactive_departments">-</h2>
+        </div>      
+      </div>
+    </div> 
+  </div>
+
+  <div class="row shadow-sm mx-0 p-1">
+    <h2 class="pl-1">Create department</h2>
+    <div class="col-md-10 px-1">
+      <input class="form-control my-1 " id="deptname" placeholder="Department name" type="text">
+    </div>
+    <div class="col-md-2 px-1">
+      <button id="createdeptbtn" class="btn form-control btn-primary btn-block my-1 pb-1" onclick="createDepartment()"><span class="material-icons">add</span> Create</button>
+    </div>
+  </div>
+
+  <div class="table-responsive-md shadow-sm mt-5 mb-2 p-1">
+    <label for="pagesize" >Page size:</label>
+    <select name="size" id="pagesize" onchange="changePageSize()">
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="25">25</option>
+      <option value="30">30</option>
+    </select>
+    <div class="float-right">
+      <label for="orderby"  >Order by:</label>
+      <select name="size" id="orderby" class="p-1 ml-2" onchange="orderBy()">
+        <option value="createdAt">created on</option>
+        <option value="name">name</option>
+        <option value="status">status</option>
+      </select>
+    </div>            
+    <table class="table table-striped table-bordered table-hover text-center mt-2" width="100%">
+      <thead >
+        <tr class="justify-content-center align-top">
+            <th scope="col">ID</th>
+            <th scope="col">Department name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Created on</th>
+            <th scope="col">Actions</th>
+        </tr>
+      </thead >
+      <tbody id="data">
+
+      </tbody>
+    </table>
+    <p id="pagesindicator" class="py-2"></p>
+  </div>
+  <div style="width: 100%;">
+    <button id="previousbtn" class="btn pagelink btn-outline-dark float-left px-2 mt-1 mb-3">Previous</button>
+    <button id="nextbtn" class="btn pagelink btn-outline-dark float-right px-2 mt-1 mb-3">Next</button>
+  </div>
+</div>
+
+<script src="/js/department.js"></script>
+

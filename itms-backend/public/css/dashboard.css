@@ -1,0 +1,313 @@
+body {
+  background: linear-gradient(to left, rgb(0, 162, 255,0.5), rgba(0,0,0,0));
+}
+span.material-icons {
+  vertical-align: middle;
+}
+.material-icons.md-18 { 
+  font-size: 18px;
+  vertical-align: middle; 
+  
+}
+
+.nav-item {
+  color: white;
+}
+
+select {
+  background-color: transparent;
+  border-radius: 6px;
+}
+
+.navbar-brand {
+  font-style: italic;
+  font-weight: bold;
+}
+
+#togglePassword {
+  float: right;
+  padding-top: 3px;
+}
+
+table.table-bordered > tbody > tr > td.question-body {
+  padding: 5px;
+  overflow: auto;
+  white-space: nowrap;
+  text-overflow: clip;
+  max-width: 60%;
+}
+
+.tabs {
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.tab {
+  display: block;
+  color: black;
+  padding: 30px 15px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 15px;
+  word-wrap: break-word;
+}
+
+
+button.tab {
+  display: block;
+  color: black;
+  padding: 30px 15px;
+  width: 100%;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 15px;
+  outline: none;
+  word-wrap: break-word;
+}
+
+#logoutbtn:hover {
+  color: black;
+}
+
+#closebtn {
+  cursor: pointer;
+}
+
+span.navbar-toggler:active, span.navbar-toggler:focus {
+  outline: none;
+}
+
+.form-control-plaintext{
+  border: none;
+}
+
+.active {
+  color: white;
+}
+
+button.tab:active {
+  background-color: rgb(0, 162, 255, 1);
+  color: white;
+}
+
+.tab:hover {
+  background-color: rgb(0, 162, 255, 1);
+  color: white;
+  text-decoration: none;
+}
+
+.jumbotron {
+  border-radius: 15px;
+  margin-bottom: 0px;
+  text-align: center;
+  background-color: transparent;
+}
+#instructionsInput {
+  background-color: transparent;
+  border-color: black;
+}
+input[type=text] {
+  background-color: transparent;
+  border-color: black;
+}
+select.form-control {
+  background-color: transparent;
+  border-color: black;
+}
+input[type=number] {
+  background-color: transparent;
+  border-color: black;
+}
+input[type=password] {
+  background-color: transparent;
+  border-color: black;
+}
+
+input[type=datetime-local] {
+  background-color: transparent;
+  border-color: black;
+}
+
+input[type=email] {
+  background-color: transparent;
+  border-color: black;
+}
+input[type=email]:read-only {
+  background-color: transparent;
+  border-color: black;
+}
+input[type=number]:read-only {
+  background-color: transparent;
+  border-color: black;
+}
+input[type=text]:read-only {
+  background-color: transparent;
+  border-color: black;
+}
+input[type=tel] {
+  background-color: transparent;
+  border-color: black;
+}
+.profile {
+  background-color: transparent;
+  border: none;
+  font-size: xx-large;
+}
+.profile:read-only {
+  background-color: transparent;
+  border: none;
+  font-size: xx-large;
+}
+.profile:disabled {
+  background-color: transparent;
+  border: none;
+  font-size: xx-large;
+}
+.table {
+  margin-bottom: 0px;
+}
+
+table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
+  border:1px solid black;
+  width:auto;
+}
+
+.card-body {
+  word-wrap: break-word;
+}
+
+.container i {
+  cursor: pointer;
+}
+
+.card {
+  color: white;
+  border-radius: 15px;
+  border: none;
+}
+.profile-card {
+  background-color: transparent;
+  border-radius: 15px;
+  color: black;
+}
+
+.display-4 {
+  font-weight: bold;
+}
+
+.rounded {
+  border-radius: 15px;
+}
+
+#usererror {
+  display: none;
+}
+#usersuccess {
+  display: none;
+}
+
+#pagesindicator {
+  font-size: 1.0rem;
+  text-align: start;
+}
+
+.pagelink {
+  border-color: black;
+  background-color: transparent;
+  color: black;
+  outline: none;
+}
+
+button.pagelink:hover, button.pagelink:focus {
+  outline: none;
+}
+
+a.nav-link {
+  color: black;
+}
+
+#editor-container {
+  height: 600px;
+  border:1px solid black;
+  border-radius: 5px;
+}
+#question-editor{
+  height: 400px;
+  border:1px solid black;
+  border-radius: 5px;
+}
+
+.ql-toolbar.ql-snow{
+  border-color: black;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.tag-container {
+  border: 1px solid black;
+  border-radius: 5px;
+  background: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 6px;
+  overflow-x: hidden;
+}
+.tag-container .tag {
+  height: 30px;
+  margin: 5px;
+  padding: 5px 6px;
+  border-radius: 5px;
+  background: rgb(0, 162, 255, 1);
+  display: flex;
+  align-items: center;
+  color: white;
+  cursor: default;
+}
+.tag i {
+  font-size: 16px;
+  color: white;
+  margin-left: 5px;
+}
+.tag-container input {
+  padding: 5px;
+  font-size: 16px;
+  border: 0;
+  outline: none;
+  font-family: 'Rubik';
+  color: #333;
+  flex: 1;
+  background: transparent;
+}
+
+#option1-editor, #option2-editor, #option3-editor , #option4-editor{
+  height: 100px;
+  border:1px solid black;
+  border-radius: 5px;
+}
+
+.option-body {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#optionId {
+  border: none;
+  min-width:15px;
+  max-width: 50px;
+}

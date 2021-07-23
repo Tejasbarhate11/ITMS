@@ -1,0 +1,34 @@
+{{> navbar}}
+<div class="container-fluid" >
+    <div class="col-md-4 mx-auto mt-5 shadow p-5" style="border-radius: 15px;">
+        <div>
+            <h2><a href="/dashboard/users"><span class="material-icons pb-1">clear</span></a> Update user</h2>
+        </div>
+        {{#if message}}
+            <div class="alert mt-2 {{messageClass}}" role="alert">
+                {{message}}
+            </div>
+        {{/if}}
+        <div class="form-group">
+            <label for="idInput">ID:</label>
+            <input type="number" class="form-control-plaintext" id="idInput" value="{{id}}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="nameInput">Name:</label>
+            <input type="text" class="form-control" id="nameInput" value="{{name}}" autofocus autocomplete="off" >
+        </div>
+        <div class="form-group">
+            <label for="emailInput">Email:</label>
+            <input type="email" class="form-control-plaintext" id="emailInput" value="{{email}}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="mobileNoInput">Mobile no:</label>
+            <input type="tel" class="form-control" id="mobileNoInput" value="{{mobile_no}}" autocomplete="off">
+        </div>
+        <div class="form-group" style="margin-top: 40px" >
+            <button id="submitbtn" class="btn btn-primary btn-block mt-4" onclick="updateData()" style="border-radius: 15px" {{updatebtn}}>Update user</button>
+        </div>
+    </div>
+</div>
+
+<script src="/js/updateuser.js"></script>

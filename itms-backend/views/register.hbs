@@ -1,0 +1,36 @@
+{{> header }}
+<div class="container" >
+    <div class="col-md-5 mx-auto" style="width: 60%; margin-top: 5%">
+
+        {{#if message}}
+            <div class="alert {{messageClass}}" role="alert">
+                {{message}}
+            </div>
+        {{/if}}
+
+        <form method="POST" action="/register">
+            <div class="form-group">
+                <label for="nameInput">Name</label>
+                <input name="name" type="text" class="form-control" id="nameInput" placeholder="Enter your name" autofocus required>
+            </div>
+
+            <div class="form-group">
+                <label for="emailInput">Email</label>
+                <input name="email" type="email" class="form-control" id="emailInput" placeholder="Enter your email address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobileNoInput">Mobile no.</label>
+                <input name="mobile_no" type="tel" class="form-control" placeholder="1234567890" id="mobileNoInput" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="passwordInput">Password</label>
+                <input name="password" type="password" class="form-control" id="passwordInput" placeholder="Password" required>
+            </div>
+            <div class="form-group" style="margin-top: 30px">
+                <button type="submit" class="btn btn-outline-primary btn-block">Register</button>
+            </div>
+        </form>
+    </div>
+</div>

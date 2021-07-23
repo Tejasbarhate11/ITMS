@@ -1,0 +1,51 @@
+{{> header}}
+<div class="container-fluid p-4">
+    <h1><span id="closebtn" class="material-icons pb-2">close</span> Question (1/3)</h1>
+    <div class="form-group mt-3">
+        <label for="questionInput">Question body:</label>
+        <input name="question" class="form-control" id="questionInput" type="hidden">
+        <div id="question-editor">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="totalMarksInput">Total marks:</label>
+        <input name="total_score" type="number" class="form-control" id="totalMarksInput" min="0" max="100">
+    </div>
+    <div class="form-group">
+        <label for="timeLimitInput">Time limit (seconds): </label>
+        <input name="time_limit" type="number" class="form-control" id="timeLimitInput" min="0" max="600">
+    </div>
+    <div class="form-group">
+      <label>Keywords:</label>
+      (press enter after you typed to add the keyword)
+      <div class="tag-container">
+        <input/>  
+      </div>
+    </div>
+    <label for="questypeinput">Question type:</label>
+    <select name="qtype" id="questypeinput" class="form-control">
+      <option value="none">-------------</option>
+      <option value="single_ans_mcq">MCQ (Single answer)</option>
+      <option value="multiple_ans_mcq">MCQ (Multiple answers)</option>
+      <option value="true_false">True or false</option>
+    </select>       
+    <button id="addbtn" class="form-control btn btn-primary btn-block mt-4">Next</button>    
+</div>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/js/createquestion.js"></script>
+
+<script>
+    var questionQuill = new Quill('#question-editor', {
+    modules: {
+      toolbar: [
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'script': 'sub'}, { 'script': 'super' }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        ['blockquote', 'code-block']
+      ]
+    },
+    placeholder: 'Enter question...',
+    theme: 'snow'
+    });
+</script>

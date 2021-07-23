@@ -1,0 +1,40 @@
+{{> header }}
+<div class="container ">
+    <div class="col-md-5 mx-auto shadow p-5 mb-5" style="width: 60%; margin-top: 10%; border-radius: 15px">
+
+        <h2 style="text-align: center; margin-bottom: 20px">ADMIN LOGIN</h2>
+        {{#if message}}
+            <div class="alert {{messageClass}}" role="alert">
+                {{message}}
+            </div>
+        {{/if}}
+
+        <form method="POST" action="/login">
+            <div class="form-group">
+                <label for="inputEmail">Email address</label>
+                <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Enter E-mail" autofocus required>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" style="width: 100%;">Password<span id="togglePassword" class="material-icons md-18">visibility_off</span></label>
+                <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password" required autocomplete="off">
+            </div>
+            <div class="form-group" style="margin-top: 40px">
+                <button type="submit" class="btn btn-outline-primary btn-block">Login</button>
+            </div>
+        </form>
+    </div>  
+</div>
+
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#inputPassword');
+
+    togglePassword.addEventListener('click', function (e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        const icon = password.getAttribute('type') === 'password' ? 'visibility' : 'visibility_off';
+        password.setAttribute('type', type);
+        this.innerHTML = icon;
+    });
+
+</script>
+

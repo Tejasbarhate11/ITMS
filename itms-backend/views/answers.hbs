@@ -1,0 +1,17 @@
+{{> header}}
+<div class="container-fluid p-4">
+    <h1><span id="closebtn" class="material-icons pb-2">close</span> Answers (3/3)</h1>
+    <p>Check the boxes of the options which is/are the right answer(s).</p>
+    {{#each options}}
+    <div class="my-4">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input mt-2" name="option" id="option" value="{{this.id}}">
+            <label class="form-check-label" for="option">Option ID: {{this.id}}</label>
+        </div>
+        <div class="option-body">{{{this.option_body}}}</div>
+    </div>
+    {{/each}}
+    <button id="donebtn" class="btn btn-primary btn-block" onclick="addAnswers()">Done</button>
+</div>
+
+<script src="/js/answers.js"></script>

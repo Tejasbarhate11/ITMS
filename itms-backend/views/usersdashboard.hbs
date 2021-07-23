@@ -1,0 +1,121 @@
+{{> navbar}}
+{{> dashnav}}
+<div class="container-fluid px-4">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+      <h1 class="display-4">Users</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="card bg-primary text-center shadow p-2 mb-5">
+        <div class="card-body">
+          <h4>Active users</h4>
+          <h2 id="active_users">-</h2>
+        </div>      
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card bg-primary text-center shadow p-2 mb-5">
+        <div class="card-body">
+          <h4>Active admins</h4>
+          <h2 id="active_admins">-</h2>
+        </div>      
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card bg-primary text-center shadow p-2 mb-5">
+        <div class="card-body">
+          <h4>Inactive users</h4>
+          <h2 id="inactive_users">-</h2>
+        </div>      
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card bg-primary text-center shadow p-2 mb-5">
+        <div class="card-body">
+          <h4>Deleted users</h4>
+          <h2 id="deleted_users">-</h2>
+        </div>      
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow-sm">
+    <h2 class="mx-2">Search users</h2>
+    <button id="clearsearchbtn" class="btn btn-danger btn-sm mx-2" onclick="clearSearchResults()" style="display: none;">Clear search results</button>
+    <div class="row mx-0">
+      <div class="col-sm-4 px-2 my-2">
+        <input class="form-control" id="nameInput" type="text" placeholder="Name">
+      </div>
+      <div class="col-sm-4 px-2 my-2">
+        <input class="form-control" id="emailInput" type="email" placeholder="E-mail">
+      </div>
+      <div class="col-sm-4 px-2 my-2">
+        <input class="form-control" id="mobInput" type="tel" placeholder="Mobile no">
+      </div>
+    </div>
+    <div class="row mx-0">
+      <div class="col-sm-4 px-2 my-2">
+        <select id="statusIn" class="form-control">
+          <option value="all">all</option>
+          <option value="active">active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+      <div class="col-sm-4 px-2 my-2">
+        <select id="deletedIn" class="form-control">
+          <option value="not deleted">Not deleted</option>
+          <option value="deleted">deleted</option>
+        </select>
+      </div>
+      <div class="col-sm-4 px-2 my-2">
+        <button class="btn btn-primary btn-block" onclick="searchUsers()"><span class="material-icons">search</span> Search</button>
+      </div>
+    </div>
+  </div>
+   
+  <div class="table-responsive-md shadow-sm mt-5 mb-2 p-1">    
+    <label for="pagesize" class="ml-1" >Page size:</label>
+    <select name="size" id="pagesize" onchange="changePageSize()">
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="25">25</option>
+      <option value="30">30</option>
+    </select>       
+    <a class="btn btn-success btn-sm mx-3" href="/dashboard/users/create"><span class="material-icons pb-1">person_add</span> Create user</a>
+    <div class="float-right">
+      <label for="orderby"  >Order by:</label>
+      <select name="size" id="orderby" class="p-1 ml-2" onchange="orderBy()">
+        <option value="createdAt">created on</option>
+        <option value="name">name</option>
+        <option value="email">email</option>
+        <option value="status">status</option>
+      </select>
+    </div>      
+    <table class="table table-striped table-bordered table-hover text-center mt-2" width="100%">
+      <thead >
+        <tr class="justify-content-center  align-top">
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Mobile no.</th>
+            <th scope="col">Status</th>
+            <th scope="col">Created on</th>
+            <th scope="col">Actions</th>
+        </tr>
+      </thead >
+      <tbody id="data">
+      </tbody>
+    </table>
+    <div id="nosearchresult" class="alert alert-danger mx-1 my-2">
+    </div>
+    <p id="pagesindicator" class="py-2">-/-</p>
+  </div>
+  <div style="width: 100%;">
+    <button id="previousbtn" class="btn pagelink btn-outline-dark float-left px-2 mt-1 mb-3">Previous</button>
+    <button id="nextbtn" class="btn pagelink btn-outline-dark float-right px-2 mt-1 mb-3">Next</button>
+  </div>
+</div>
+
+<script src="/js/users.js"></script>

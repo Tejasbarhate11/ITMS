@@ -1,0 +1,36 @@
+<div class="container-fluid p-4">
+    <h1><span id="closebtn" class="material-icons pb-2">close</span> Options (2/3)</h1>
+    <div class="form-group mt-3">
+        <label for="questionId">Question ID:</label>
+        <input name="questionID" class="form-control-plaintext px-1" id="questionId" type="number" readonly>
+    </div>
+    <div class="form-group">
+        <label>Option 1:</label>
+        <div id="option1-editor" class="options">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Option 2:</label>
+        <div id="option2-editor" class="options">
+        </div>
+    </div>    
+    <button id="nextbtn" class="form-control btn btn-primary btn-block mt-4" onclick="addOptions()">NEXT</button>    
+</div>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/js/tfoptions.js"></script>
+
+<script>
+    var config = {
+        modules: {
+        toolbar: [
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'script': 'sub'}, { 'script': 'super' }],
+        ]
+        },
+        placeholder: 'Enter option text...',
+        theme: 'snow'
+    }
+    var option1editor = new Quill('#option1-editor', config);
+    var option2editor = new Quill('#option2-editor', config);
+</script>

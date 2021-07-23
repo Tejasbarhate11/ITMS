@@ -1,0 +1,35 @@
+{
+  "name": "itms-backend",
+  "version": "1.0.0",
+  "description": "Backend for the ITMS",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server"
+  },
+  "author": "Tejas Barhate",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-session-sequelize": "^7.1.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
+    "express-session": "^1.17.2",
+    "fastest-validator": "^1.11.0",
+    "helmet": "^4.6.0",
+    "jodit": "^3.7.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "node-cron": "^3.0.0",
+    "nodemailer": "^6.6.3",
+    "sequelize": "^6.6.2",
+    "serve-favicon": "^2.5.0",
+    "slugify": "^1.5.3"
+  }
+}

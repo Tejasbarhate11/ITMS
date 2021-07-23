@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-center" >
+    
+        {{#if message}}
+            <div class="alert {{messageClass}}" role="alert">
+                {{message}}
+            </div>
+        {{/if}}
+
+        <div class="card profile-card">
+            <form method="POST" action="/update">
+                <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label my-auto">Name:</label>
+                    <div class="col-sm-10">
+                        <input name="name" type="text" value="Tejas Barhate" class="profile form-control my-auto" id="inputName" disabled>
+                    </div>
+                </div>
+                <div class="form-group row mt-4">
+                    <label for="inputEmail" class="col-sm-2 col-form-label my-auto">Email:</label>
+                    <div class="col-sm-10">
+                        <input name="email" type="email" value="admin@droom.in" class="profile form-control my-auto" id="inputEmail" readonly>
+                    </div>
+                </div>
+                <div class="form-group row mt-4">
+                    <label for="inputMobileNo" class="col-sm-2 col-form-label my-auto">Mobile no:</label>
+                    <div class="col-sm-10">
+                        <input name="mobile_no" type="tel" value="8421178983" class="profile form-control my-auto" pattern="[0-9]{10}" id="inputMobileNo" disabled>
+                    </div>
+                </div>
+            </form>
+
+            <button id="updatebtn" onclick="updateBtn(this)" class="btn btn-primary mt-4">Update</button>
+        </div>
+</div> 

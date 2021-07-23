@@ -1,0 +1,25 @@
+body {
+  background-color: aliceblue;
+}
+
+.jumbotron {
+  background-image: linear-gradient(to left, rgb(0, 162, 255,0.5), rgb(0, 162, 255,1));
+  border-radius: 15px;
+}
+
+.jumbotron p {
+  font-size: 2.5rem;
+  margin-top: 50px
+}
+
+.details {
+  font-size: 1rem;
+  padding: 10px 5px;
+  border-radius: .25rem;
+  border: 1px solid;
+  border-color: #00000038;
+}
+
+.welcome {
+  font-weight: lighter;
+}
