@@ -1,3 +1,10 @@
+const db = require('../models/index')
+const asyncErrorhandler = require('../middleware/async.middleware')
+const Test = db.Test
+const Op = db.Sequelize.Op
+const Department = db.Department
+const Designation = db.Designation
+
 exports.openDashboard = (req, res, next) => {
     res.render('dashboard', {
         page_title: 'Dashboard',
@@ -19,12 +26,31 @@ exports.userDashboard = (req, res, next) => {
     })
 }
 
-exports.testDashboard = (req, res, next) => {
+exports.testDashboard = asyncErrorhandler(async (req, res, next) => {
+    const departments = await Department.findAll({
+        raw: true,
+        attributes: ['id', 'name'],
+        where:{
+            status: 'active'
+        },
+        order: [['name','ASC']]
+    })
+    const designations = await Designation.findAll({
+        raw: true,
+        attributes: ['id', 'designation'],
+        where:{
+            status: 'active'
+        },
+        order: [['designation','ASC']]
+    })
+
     res.render('testsdashboard', {
         page_title: 'Tests',
-        tests: "active"
+        tests: "active",
+        departments,
+        designations
     })
-}
+})
 
 exports.questionDashboard = (req, res, next) => {
     res.render('questionsdashboard', {

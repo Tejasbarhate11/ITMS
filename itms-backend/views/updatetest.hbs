@@ -1,20 +1,25 @@
 {{> header}}
 <div class="container-fluid p-4">
-    <h1><span id="closebtn" class="material-icons pb-2">close</span> Create test</h1>
+    <h1><span id="closebtn" class="material-icons pb-2">close</span> Update test</h1>
+    <div class="form-group">
+        <label for="idInput">ID:</label>
+        <input name="id" type="number" class="form-control" id="idInput" value={{id}} readonly>
+    </div>
     <div class="form-group">
         <label for="titleInput">Title:</label>
-        <input name="title" type="text" class="form-control" id="titleInput" autofocus autocomplete="off" >
+        <input name="title" type="text" class="form-control" id="titleInput" value={{title}} autofocus autocomplete="off" >
     </div>
     <div class="form-group">
         <label for="instructionsInput">Instructions:</label>
         <input name="instructions" class="form-control" id="instructionsInput" type="hidden" style="width: 100%;">
         <div id="editor-container">
+            {{{instructions}}}
         </div>
     </div>
     <div class="form-group">
         <label for="departmentInput" >Select department:</label>
         <select name="department" id="departmentInput" class="form-control">
-            <option value="null">department</option>
+            <option value={{depId}}>{{dep}}</option>
             {{#each departments}}
                 <option value={{this.id}}>{{this.name}}</option>
             {{/each}}
@@ -23,17 +28,17 @@
     <div class="form-group">
         <label for="designationInput" >Select designation:</label>
         <select name="designation" id="designationInput" class="form-control">
-            <option value="null">designation</option>
+            <option value={{desId}}>{{des}}</option>
             {{#each designations}}
                 <option value={{this.id}}>{{this.designation}}</option>
             {{/each}}
         </select>
     </div>
     
-    <button id="createbtn" class="form-control btn btn-primary btn-block mt-2" onclick="createTest()">Create test</button>    
+    <button id="createbtn" class="form-control btn btn-primary btn-block mt-2" onclick="updateTest()">Create test</button>    
 </div>
 
-<script src="/js/createtest.js"></script>
+<script src="/js/updatetest.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
     var quill = new Quill('#editor-container', {

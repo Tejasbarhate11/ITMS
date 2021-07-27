@@ -73,16 +73,22 @@ exports.createDepartment = asyncErrorhandler(async (req, res, next) => {
 })
 
 exports.deleteDepartment = asyncErrorhandler( async(req, res, next) => {
-    await Department.destroy({
-        where: {
-            id: req.params.id
-        }
-    });
+    const department = await Department.findByPk(req.params.id)
 
-    res.status(200).json({
-        success: true,
-        message: "Department deleted successfully"
-    })
+    const count = await department.countTests()
+
+    if(count !== 0){
+        res.status(200).json({
+            success: false,
+            message: `Could not delete. Requested department still has ${count} active test(s)`
+        })
+    }else{
+        await department.destroy()
+        res.status(200).json({
+            success: true,
+            message: "Department deleted successfully"
+        })
+    }
 })
  
 exports.updateDepartment = asyncErrorhandler(async (req, res, next) => {

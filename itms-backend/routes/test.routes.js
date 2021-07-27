@@ -18,12 +18,14 @@ const {
     updateStatus,
     getQuestionsOfTest,
     assignQuestionsPage,
-    getTestData,
     getTestInfo,    
     removeAssignedQuestion,
     assignQuestions,
     assignSingleExamineePage,
-    getCompleteTest
+    getCompleteTest,
+    updateTestPage,
+    updateTest,
+    assignUsersPage
 } = require('../controllers/test.controllers');
 
 router.route('/dashboard/tests/statistics')
@@ -36,14 +38,18 @@ router.route('/dashboard/tests/create')
     .get(isAuthenticated, createTestPage)
     .post(isAuthenticated, createTest);
 
-router.route('/dashboard/tests/:id/assign')
+router.route('/dashboard/tests/update/:id')
+    .get(isAuthenticated, updateTestPage)
+    .post(isAuthenticated, updateTest);
+
+router.route('/dashboard/tests/:id/assign/questions')
     .get(isAuthenticated, assignQuestionsPage)
     .post(isAuthenticated, assignQuestions);
 
-router.route('/dashboard/tests/:id/assign')
-    .get(isAuthenticated, getTestData);
+router.route('/dashboard/tests/:id/assign/users')
+    .get(isAuthenticated, assignUsersPage);
 
-router.route('/dashboard/tests/update/:id')
+router.route('/dashboard/tests/status/:id')
     .put(isAuthenticated, updateStatus);
 
 router.route('/dashboard/tests/delete/:id')

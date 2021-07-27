@@ -152,6 +152,8 @@ function deleteDepartment(btn, departmentID){
             .then(data => {
                 if(data.success){
                     table.deleteRow(btn.parentNode.parentNode.rowIndex-1);
+                }else{
+                    alert(data.message)
                 }
             })    
     }

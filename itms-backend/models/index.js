@@ -51,7 +51,7 @@ Object.keys(db).forEach(modelName => {
 //sequelize.sync();
 
 
-//db.Question.sync({ alter: true })
+//db.Assignment.sync({ alter: true })
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

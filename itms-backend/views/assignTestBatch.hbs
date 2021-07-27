@@ -1,0 +1,46 @@
+{{> header}}
+
+<div class="container-fluid p-4">
+    <h1><span id="closebtn" class="material-icons pb-2">close</span> Batch assign test</h1>
+    <div class="shadow-sm mx-0 p-3 my-3">
+        <h3 class="my-2">Selected Test Details</h3>
+        <label for="testIdInput">Test ID:</label>
+        <input class="form-control mb-1" id="testId" type="number" readonly value="{{testId}}" autocomplete="off">
+        <label for="testTitle">Test Title:</label>
+        <input class="form-control mb-1" id="testTitle"  type="text" readonly value="{{testTitle}}" autocomplete="off">
+    </div>
+    <div class="mx-0 p-1 my-3">
+        <h3 class="pl-1">Select Test Start and End Times</h3>
+        <p class="pl-1">(Please select start time atleast an hour later than current time) </p>
+        <div class="input-group px-1">
+          <div class="input-group-prepend ">
+            <span class="input-group-text bg-primary text-light" id="">Test Start and End time</span>
+          </div>
+          <input type="datetime-local" class="form-control datepicker" min="0" id="startTimeInput">
+          <input type="datetime-local" class="form-control datepicker" id="endTimeInput">
+        </div>
+    </div>
+    {{!-- <div class="shadow-sm mx-0 p-3 my-4">
+        <h3 class="my-2">Select test to assign</h3>
+        <label for="testIDInput">Test ID:</label>
+        <input class="form-control mb-2" id="testIDInput" placeholder="Test ID" type="number" min="0">
+        <button id="testSearchBtn" class="btn btn-primary btn-block my-1"><span class="material-icons">search</span> Search</button>
+        <div id="selectTestDetails" class="mt-3">
+          <h3 class="my-2"><span id="removeSelectedTestBtn" class="material-icons">clear</span> Test Details</h3>
+          <label for="testTitleInput">Test Title:</label>
+          <input class="form-control mb-1" id="testTitleInput" placeholder="Test Title" type="text" readonly>
+          <label for="departmentInput">Department:</label>
+          <input class="form-control mb-1" id="departmentInput" placeholder="Department" type="text" readonly>
+          <label for="designationInput">Designation:</label>
+          <input class="form-control mb-1" id="designationInput" placeholder="Designation" type="text" readonly>
+        </div>
+        <div id="noTestFound" class="alert alert-danger mx-0 my-2">
+            No Test found!
+        </div>
+    </div> --}}
+    <div class="mx-0 p-1 my-3">
+      <button id="assignbtn" class="btn btn-primary btn-block">ASSIGN</button>
+    </div>   
+</div>
+
+<script src="/js/assigntestbatch.js"></script>

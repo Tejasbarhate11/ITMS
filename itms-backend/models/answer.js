@@ -6,9 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   class Answer extends Model {
     
     static associate(models) {
-        Answer.belongsTo(models.Question);
+      Answer.belongsTo(models.Question);
     }
   };
+  
   Answer.init({
     correct: DataTypes.JSON
   }, 

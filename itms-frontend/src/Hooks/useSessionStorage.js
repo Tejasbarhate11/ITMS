@@ -1,21 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
+import secureStorage from '../Utils/secureStorage'
 
 function getSessionStorageOrDefault(key, defaultValue) {
-  const stored = sessionStorage.getItem(key);
+  const stored = secureStorage.getItem(key)
   if (!stored) {
-    return defaultValue;
+    return defaultValue
   }
-  return JSON.parse(stored);
+  return stored
 }
 
 export function useSessionStorage(key, defaultValue){
   const [value, setValue] = useState(
     getSessionStorageOrDefault(key, defaultValue)
-  );
+  )
 
   useEffect(() => {
-    sessionStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
+    secureStorage.setItem(key, value);
+  }, [key, value])
 
-  return [value, setValue];
+  return [value, setValue]
 }

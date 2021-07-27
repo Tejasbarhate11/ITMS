@@ -27,8 +27,7 @@ const startTimeInput = document.getElementById("startTimeInput");
 const endTimeInput = document.getElementById("endTimeInput");
 
 //assign
-const assignbtn = document.getElementById("assignbtn");
-
+const assignbtn = document.getElementById("assignbtn")
 closebtn.addEventListener("click", () => {
     if(sessionStorage.getItem("selected_test_id")){
         if(!confirm("Are you sure you want to go back? Changes won't be saved")){

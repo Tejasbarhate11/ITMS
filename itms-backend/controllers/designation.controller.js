@@ -57,7 +57,7 @@ exports.createDesignation = asyncErrorhandler(async (req, res, next) => {
         status: 'active'
     }
 
-    designation = await Designation.create(designation);
+    designation = await Designation.create(designation)
 
     if(designation){
         res.status(200).json({
@@ -73,16 +73,22 @@ exports.createDesignation = asyncErrorhandler(async (req, res, next) => {
 })
 
 exports.deleteDesignation = asyncErrorhandler( async(req, res, next) => {
-    await Designation.destroy({
-        where: {
-            id: req.params.id
-        }
-    });
+    const designation = await Designation.findByPk(req.params.id)
 
-    res.status(200).json({
-        success: true,
-        message: "Designation deleted successfully"
-    })
+    const count = await designation.countTests()
+
+    if(count !== 0){
+        res.status(200).json({
+            success: false,
+            message: `Could not delete. Requested designation still has ${count} active test(s)`
+        })
+    }else{
+        await designation.destroy()
+        res.status(200).json({
+            success: true,
+            message: "Designation removed successfully"
+        })
+    }
 })
 
 exports.updateDesignation = asyncErrorhandler(async (req, res, next) => {
@@ -104,13 +110,13 @@ exports.updateDesignation = asyncErrorhandler(async (req, res, next) => {
 exports.getDesignationStatistics = asyncErrorhandler(async (req, res, next) => {
     const active_designations = await Designation.count({
         where: { status: 'active' }
-    });
+    })
     const inactive_designations = await Designation.count({
         where: { status: 'inactive' }
-    });
+    })
 
     res.status(200).json({
         active_designations,
         inactive_designations
-    });
+    })
 })

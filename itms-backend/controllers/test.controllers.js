@@ -1,24 +1,25 @@
-const db = require('../models/index');
-const asyncErrorhandler = require('../middleware/async.middleware');
-const Test = db.Test;
-const Op = db.Sequelize.Op;
-const User = db.User;
-const Question = db.Question;
-const Department = db.Department;
-const Designation = db.Designation;
-const Option = db.Option;
-const TestQuestion = db.TestQuestion;
-const slugify = require('slugify');
-const sequelize = db.sequelize;
+const db = require('../models/index')
+const asyncErrorhandler = require('../middleware/async.middleware')
+const Test = db.Test
+const Op = db.Sequelize.Op
+const User = db.User
+const Question = db.Question
+const Department = db.Department
+const Designation = db.Designation
+const Assignment = db.Assignment
+const Option = db.Option
+const TestQuestion = db.TestQuestion
+const slugify = require('slugify')
+const sequelize = db.sequelize
 const {
     updateTestDetails
-} = require('../utils/testUtils');
+} = require('../utils/testUtils')
 const {
     sendTestEmail
-} = require('../utils/examineeEmail');
+} = require('../utils/examineeEmail')
 const { 
     decrypt 
-} = require('../utils/tokenUtil');
+} = require('../utils/tokenUtil')
 
 const getOrderBy = (orderby) => {
     if(orderby === "createdAt"){
@@ -41,7 +42,7 @@ const getPagination = (page, size) => {
     const offset = page ? page * limit : 0;
   
     return { limit, offset };
-};
+}
 
 const getPagingData = (data, page, limit) => {
     const { count: totalTests, rows: tests } = data;
@@ -49,7 +50,7 @@ const getPagingData = (data, page, limit) => {
     const totalPages = Math.ceil(totalTests / limit);
   
     return { totalTests, totalPages, currentPage, tests };
-};
+}
 
 exports.getTests = (req, res, next) => {
     const {page, size, orderby} = req.query;
@@ -58,6 +59,10 @@ exports.getTests = (req, res, next) => {
     Test.findAndCountAll({
         raw: true,
         attributes: ['id', 'title', 'status', 'createdAt'],
+        where: {
+            department_id: req.body.department !== "none"? req .body.department : {[Op.ne]: null},
+            designation_id: req.body.designation !== "none"? req .body.designation : {[Op.ne]: null}
+        },
         order: [getOrderBy(orderby)], 
         limit, 
         offset,
@@ -97,7 +102,7 @@ exports.updateStatus = asyncErrorhandler(async (req, res, next) => {
         success: true,
         message: "Test status changed successfully"
     })
-});
+})
 
 
 exports.getTestsStatistics = asyncErrorhandler(async (req, res, next) => {
@@ -133,7 +138,7 @@ exports.createTestPage =asyncErrorhandler(async (req, res, next) => {
             status: 'active'
         },
         order: [['name','ASC']]
-    });
+    })
     const designations = await Designation.findAll({
         raw: true,
         attributes: ['id', 'designation'],
@@ -141,7 +146,7 @@ exports.createTestPage =asyncErrorhandler(async (req, res, next) => {
             status: 'active'
         },
         order: [['designation','ASC']]
-    });
+    })
     res.render('createtest',{
         page_title: "Create test",
         departments,
@@ -164,20 +169,43 @@ exports.createTest = asyncErrorhandler(async (req, res, next) => {
 })
 
 exports.deleteTest = asyncErrorhandler(async (req, res, next) => {
-    await Test.update({
-        status: 'inactive',
-        deleted_at: Date.now()
-    },
-    {
-        where: {
-            id: req.params.id
-        }
-    });
+    const test = await Test.findByPk(req.params.id);
 
-    res.status(200).json({
-        success: true,
-        message: "Test deleted successfully"
-    });
+    const count = await test.countAssignments({
+        where: {
+            status: 'started'
+        }
+    })
+    if(count === 0){
+        await Test.update({
+            status: 'inactive',
+            deleted_at: Date.now()
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+
+        await Assignment.update({
+            status: 'cancelled'
+        },{
+            where:{
+                test_id: req.params.id,
+                status: 'scheduled'
+            }
+        })
+
+        res.status(200).json({
+            success: true,
+            message: "Test deleted successfully"
+        });
+    }else{
+        res.status(200).json({
+            success: false,
+            message: "This test has been assigned and certain users are currently giving the test"
+        });
+    }    
 })
 
 exports.deactivateTest = asyncErrorhandler(async (req, res, next) => {
@@ -238,40 +266,6 @@ exports.assignQuestionsPage =  (req, res, next) => {
         page_title: 'Assign questions'
     });
 }
-
-exports.getTestData = asyncErrorhandler(async (req, res, next) => {
-    const TestID = req.params.id;
-
-    
-
-    let test = await Test.findOne({
-        nest: true,
-        attributes: ['id','title', 'time_limit', 'total_score'],
-        where: {
-            id: TestID
-        },
-        include: [{
-            model: Department,
-            attributes: ['name']
-        },{
-            model: Designation,
-            attributes: ['designation']
-        },{
-            model: User,
-            raw: true,
-            attributes: ['name']
-        }
-    ]
-    })
-
-    let questions = await test.getQuestions();
-
-    res.status(200).json({
-        success: true,
-        test,
-        questions
-    })
-})
 
 exports.getTestInfo = asyncErrorhandler(async (req, res, next) => {
     const TestID = req.params.id;
@@ -372,7 +366,7 @@ exports.sendEmail = asyncErrorhandler(async (req, res, next) => {
         });
     }
 
-});
+})
 
 exports.testEmailID = asyncErrorhandler(async (req, res, next) => {
     const eid = req.params.eid;
@@ -384,7 +378,7 @@ exports.testEmailID = asyncErrorhandler(async (req, res, next) => {
         decryptedID: did
     })
 
-});
+})
 
 exports.assignSingleExamineePage = (req, res, next) => {
     res.render('assignTestSingle', {
@@ -393,12 +387,6 @@ exports.assignSingleExamineePage = (req, res, next) => {
 }
 
 exports.getCompleteTest = asyncErrorhandler(async (req, res, next) => {
-    // const test = await Test.findByPk(req.test_id);
-
-    // const questions = await test.getQuestions({
-    //     include: Option
-    // });
-
     let test = await Test.findOne({
         attributes: ['id','title', 'time_limit', 'total_score'],
         where: {
@@ -429,5 +417,93 @@ exports.getCompleteTest = asyncErrorhandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         test: test
+    })
+})
+
+exports.updateTestPage = asyncErrorhandler(async (req, res, next) => {
+    const id = req.params.id;
+    let test = await Test.findOne({
+        attributes: ['id','title', 'instructions', 'time_limit', 'total_score'],
+        where: {
+            id: id
+        },
+        include: [{
+            model: Department,
+            attributes: ['id', 'name']
+        },{
+            model: Designation,
+            attributes: ['id', 'designation']
+        },{
+            model: User,
+            raw: true,
+            attributes: ['name']
+        }
+    ]
+    })
+
+    const departments = await Department.findAll({
+        raw: true,
+        attributes: ['id', 'name'],
+        where:{
+            status: 'active'
+        },
+        order: [['name','ASC']]
+    })
+
+    const designations = await Designation.findAll({
+        raw: true,
+        attributes: ['id', 'designation'],
+        where:{
+            status: 'active'
+        },
+        order: [['designation','ASC']]
+    })
+
+    res.render('updatetest',{
+        page_title: "Update test",
+        id: id,
+        title: test.title,
+        instructions: test.instructions,
+        depId: test["Department"].id,
+        desId: test["Designation"].id,
+        dep: test["Department"].name,
+        des: test["Designation"].designation,
+        departments,
+        designations
+    })
+
+
+})
+
+exports.updateTest = asyncErrorhandler(async (req, res, next)=>{
+    const testID = req.params.id
+
+    req.body.slug = slugify(req.body.title, {lower : true})
+
+    let test = await Test.update(req.body,{
+        where: {
+            id: testID
+        }
+    })
+
+    if(test){
+        res.status(200).json({
+            success: true,
+            message: "Test updated successfully"
+        })
+    }
+})
+
+exports.assignUsersPage = asyncErrorhandler(async (req, res, next) => {
+    const test = await Test.findOne({
+        attributes: ['id', 'title'],
+        where: {
+            id: req.params.id
+        }
+    })
+    res.render('assignTestBatch', {
+        page_title: "Batch Assign",
+        testId: req.params.id,
+        testTitle: test.title
     })
 })
